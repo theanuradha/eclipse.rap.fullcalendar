@@ -150,5 +150,14 @@
             <foregroundColor><![CDATA[r225g247b235]]></foregroundColor>
             <backgroundColor><![CDATA[r67g147b35]]></backgroundColor>
         </visualAttribute>
+        <visualAttribute name="sub_event">
+            <fontName><![CDATA[Unspecified]]></fontName>
+            <fontSize>-1</fontSize>
+            <fontSizeAsPercentage>false</fontSizeAsPercentage>
+            <style><![CDATA[Unspecified]]></style>
+            <weight><![CDATA[Unspecified]]></weight>
+            <foregroundColor><![CDATA[r245g233b216]]></foregroundColor>
+            <backgroundColor><![CDATA[r231g74b91]]></backgroundColor>
+        </visualAttribute>
     </visualAttributes>
 </entirejFramework>

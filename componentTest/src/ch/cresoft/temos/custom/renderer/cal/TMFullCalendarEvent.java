@@ -29,5 +29,7 @@ public interface TMFullCalendarEvent
     void setEditable(Boolean editable);
 
     void setTitle(String string);
+    
+    void setVa(String va);
 
 }

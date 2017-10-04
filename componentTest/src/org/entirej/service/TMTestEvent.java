@@ -21,6 +21,8 @@ public class TMTestEvent implements TMFullCalendarEvent
     private Date                           _end;
     private Boolean                        _allDay;
 
+    private String va;
+
     @EJFieldName("id")
     public String getId()
     {
@@ -211,8 +213,14 @@ public class TMTestEvent implements TMFullCalendarEvent
     @Override
     public String getVA()
     {
-        // TODO Auto-generated method stub
-        return null;
+        return va;
+    }
+    
+    @Override
+    public void setVa(String va)
+    {
+       this.va = va;
+        
     }
 
     @Override

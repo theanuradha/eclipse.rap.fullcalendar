@@ -8,8 +8,9 @@ package org.entirej.constants;
  */
 public class EJ_PROPERTIES
 {
-    public static final String M_DEFAULT = "Default";
+    public static final String M_DEFAULT    = "Default";
 
-    public static final String VA_EVENT  = "event";
+    public static final String VA_EVENT     = "event";
+    public static final String VA_SUB_EVENT = "sub_event";
 
 }

@@ -3,6 +3,7 @@ package org.entirej.forms;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import org.entirej.constants.EJ_PROPERTIES;
 import org.entirej.forms.constants.F_TEST_FULL_CALENDAR_EVENT;
 import org.entirej.framework.core.EJActionProcessorException;
 import org.entirej.framework.core.EJBlock;
@@ -61,7 +62,7 @@ public class TmTestEventAction extends EJDefaultFormActionProcessor implements E
                     throw ejActionProcessorException;
                 }
                 
-                
+                event.setVa(EJ_PROPERTIES.VA_SUB_EVENT);
                 EJBlock editBlock = form.getBlock(F_TEST_FULL_CALENDAR_EVENT.B_EDIT_EVENT_REQ.ID);
                 editBlock.getScreenItem(EJScreenType.MAIN, F_TEST_FULL_CALENDAR_EVENT.B_EDIT_EVENT_REQ.I_TITLE).setValue(event.getTitle());
                 editBlock.getScreenItem(EJScreenType.MAIN, F_TEST_FULL_CALENDAR_EVENT.B_EDIT_EVENT_REQ.I_END).setValue(event.getEnd());
@@ -93,6 +94,7 @@ public class TmTestEventAction extends EJDefaultFormActionProcessor implements E
                     editBlock.getScreenItem(EJScreenType.MAIN, F_TEST_FULL_CALENDAR_EVENT.B_EDIT_EVENT_REQ.I_START).getValue(), true);
             focusedRecord.setValue(F_TEST_FULL_CALENDAR_EVENT.B_TEST.I_END,
                     editBlock.getScreenItem(EJScreenType.MAIN, F_TEST_FULL_CALENDAR_EVENT.B_EDIT_EVENT_REQ.I_END).getValue(), true);
+            
             focusedRecord.synchronize();
         }
         if(button==EJPopupButton.THREE)
