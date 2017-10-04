@@ -19,6 +19,7 @@ public class CalendarData
     private Date         defaultDate    = new Date();
     private String       defaultView    = "month";
     private boolean      editable       = true;
+    private boolean      nowIndicator       = true;
     private List<Event>  events         = new ArrayList<CalendarData.Event>();
 
     public JsonObject toJson()
@@ -34,6 +35,7 @@ public class CalendarData
 
         object.add("defaultView", defaultView);
         object.add("editable", editable);
+        object.add("nowIndicator", nowIndicator);
         if (defaultDate != null)
             object.add("", date_formatter.format(defaultDate));
 
@@ -86,6 +88,11 @@ public class CalendarData
     public void setEditable(boolean editable)
     {
         this.editable = editable;
+    }
+    
+    public void setNowIndicator(boolean nowIndicator)
+    {
+        this.nowIndicator = nowIndicator;
     }
 
     public static class Header

@@ -33,6 +33,7 @@ import org.entirej.framework.dev.renderer.definition.interfaces.EJDevUpdateScree
 public class TMFullCalendarBlockRendererDefinition implements EJDevBlockRendererDefinition
 {
 
+    public static final String NOW_INDICATOR = "nowIndicator";
     public static final String DEFAULT_VIEW = "defaultView";
     public static final String EVENT_VA     = "eventVa";
 
@@ -59,6 +60,9 @@ public class TMFullCalendarBlockRendererDefinition implements EJDevBlockRenderer
     {
         EJDevPropertyDefinitionGroup mainGroup = new EJDevPropertyDefinitionGroup("Calendar Block");
 
+        EJDevPropertyDefinition nowIndicator = new EJDevPropertyDefinition(NOW_INDICATOR, EJPropertyDefinitionType.BOOLEAN);
+        nowIndicator.setLabel("Now Indicator");
+        nowIndicator.setDefaultValue("true");
         EJDevPropertyDefinition defaultValue = new EJDevPropertyDefinition(DEFAULT_VIEW, EJPropertyDefinitionType.STRING);
         defaultValue.setLabel("Default View");
         defaultValue.setDefaultValue("month");
@@ -70,6 +74,7 @@ public class TMFullCalendarBlockRendererDefinition implements EJDevBlockRenderer
         eventVa.setLabel("Event Default VA");
 
         mainGroup.addPropertyDefinition(eventVa);
+        mainGroup.addPropertyDefinition(nowIndicator);
         mainGroup.addPropertyDefinition(defaultValue);
 
         return mainGroup;

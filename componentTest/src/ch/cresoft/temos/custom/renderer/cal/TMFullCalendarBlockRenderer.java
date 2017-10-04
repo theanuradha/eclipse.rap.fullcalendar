@@ -67,6 +67,8 @@ public class TMFullCalendarBlockRenderer implements EJRWTAppBlockRenderer, KeyLi
     private Composite                       scrollComposite;
 
     public static final String              DEFAULT_VIEW      = "defaultView";
+
+    public static final String              NOW_INDICATOR     = "nowIndicator";
     public static final String              EVENT_VA          = "eventVa";
     private EJCoreVisualAttributeProperties eventVa;
 
@@ -533,47 +535,40 @@ public class TMFullCalendarBlockRenderer implements EJRWTAppBlockRenderer, KeyLi
             @Override
             protected void newEventRequest(Date date)
             {
-                
-                
-              
-                    EJDataRecord rec = _block.createRecordNoAction();
-                    if (rec != null && rec.getServicePojo() instanceof TMFullCalendarEvent)
+
+                EJDataRecord rec = _block.createRecordNoAction();
+                if (rec != null && rec.getServicePojo() instanceof TMFullCalendarEvent)
+                {
+                    TMFullCalendarEvent evt = (TMFullCalendarEvent) rec.getServicePojo();
+                    evt.setStart(date);
+
+                    evt.setEnd(new Date(date.getTime() + (1000 * 60 * 60)));
+                    evt.setTitle("new Event");
+                    evt.setEditable(true);
+
+                    _block.insertRecord(rec);
+
+                    currentRec = rec;
+                    Display.getCurrent().asyncExec(new Runnable()
                     {
-                        TMFullCalendarEvent evt = (TMFullCalendarEvent) rec.getServicePojo();
-                        evt.setStart(date);
-                       
-                        evt.setEnd(new Date(date.getTime() + (1000 * 60 * 60)));
-                        evt.setTitle("new Event");
-                        evt.setEditable(true);
 
-                        _block.insertRecord(rec);
-                        
-
-                        currentRec = rec;
-                        Display.getCurrent().asyncExec(new Runnable()
+                        @Override
+                        public void run()
                         {
-                            
-                            @Override
-                            public void run()
+                            try
                             {
-                                try
-                                {
                                 _block.executeActionCommand(TMFullCalendarActions.AC_EVENT_ADD, EJScreenType.MAIN);
-                                }
-                                catch (EJApplicationException e) {
-                                   System.out.println(e.getMessage());
-                                }
-                                
                             }
-                        });
+                            catch (EJApplicationException e)
+                            {
+                                System.out.println(e.getMessage());
+                            }
 
-                    }
+                        }
+                    });
 
-               
-                
-                
-                
-                
+                }
+
                 super.newEventRequest(date);
             }
 
@@ -626,6 +621,7 @@ public class TMFullCalendarBlockRenderer implements EJRWTAppBlockRenderer, KeyLi
         if (eventVaName != null)
             eventVa = _block.getForm().getVisualAttribute(eventVaName);
         calendarData.setDefaultDate(new Date());
+        calendarData.setNowIndicator(blockRendererProperties.getBooleanProperty(NOW_INDICATOR, true));
 
         GridData gridData = new GridData(GridData.FILL_BOTH);
         gridData.widthHint = mainScreenProperties.getWidth();
@@ -746,10 +742,10 @@ public class TMFullCalendarBlockRenderer implements EJRWTAppBlockRenderer, KeyLi
 
     private void toCalEvent(TMFullCalendarEvent evt, CalendarData.Event event)
     {
-        event.setAllDay(evt.getAllDay()!=null? evt.getAllDay():false );
+        event.setAllDay(evt.getAllDay() != null ? evt.getAllDay() : false);
         event.setStart(evt.getStart());
         event.setEnd(evt.getEnd());
-        event.setEditable(evt.getEditable()!=null ?evt.getEditable() :false );
+        event.setEditable(evt.getEditable() != null ? evt.getEditable() : false);
         event.setTitle(evt.getTitle());
 
         EJCoreVisualAttributeProperties eva = eventVa;
@@ -775,14 +771,13 @@ public class TMFullCalendarBlockRenderer implements EJRWTAppBlockRenderer, KeyLi
         }
 
     }
+
     private void fromCalEvent(TMFullCalendarEvent evt, CalendarData.Event event)
     {
         evt.setAllDay(event.isAllDay());
         evt.setStart(event.getStart());
         evt.setEnd(event.getEnd());
-        
-       
-        
+
     }
 
     public static String toHex(int r, int g, int b)
