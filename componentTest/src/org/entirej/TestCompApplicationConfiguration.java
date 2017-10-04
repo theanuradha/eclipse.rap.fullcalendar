@@ -76,6 +76,8 @@ public class TestCompApplicationConfiguration implements org.eclipse.rap.rwt.app
                             {
                                 System.out.println(event.getStart());
                                 System.out.println(event.getEnd());
+                                
+                                showDate(new Date());
                             }
                             
                         };
