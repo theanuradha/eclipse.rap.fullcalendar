@@ -283,7 +283,7 @@ public class FullCalendar extends Canvas
 
     public void showDate(Date start)
     {
-        // TODO Auto-generated method stub
+        remoteObject.set("date", data.date_formatter.format(start));
         
     }
 

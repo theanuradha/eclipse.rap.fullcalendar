@@ -10,7 +10,7 @@
 
 		destructor : "destroy",
 
-		properties : [ "context","update","add","remove"]
+		properties : [ "context","update","add","remove",'date']
 
 	});
 
@@ -125,6 +125,16 @@
 				
 				
 				$('#calendar').fullCalendar('removeEvents', evtId);
+				
+			}
+			
+		},
+		setDate : function(date) {
+			
+			if(this.ready )
+			{
+				$('#calendar').fullCalendar( 'gotoDate', date )
+				
 				
 			}
 			

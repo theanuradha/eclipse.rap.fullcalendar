@@ -145,7 +145,7 @@ public class CalendarData
         String       borderColor;
         String       backgroundColor;
         boolean      allDay;
-        boolean      editable;
+        boolean      editable = true;
 
         private Date start = new Date();
         private Date end   = new Date();
